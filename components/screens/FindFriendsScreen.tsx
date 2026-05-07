@@ -5,6 +5,7 @@ import { MapPin, SlidersHorizontal, Navigation, Users, ChevronDown, ChevronUp, M
 import { useAppStore, getDistance, LEVEL_LABELS } from "@/lib/store";
 import type { User } from "@/lib/store";
 import Header from "@/components/Header";
+import { getAvatarUrl } from "@/lib/avatar";
 
 const SPORT_OPTIONS = [
   { id: "alle", label: "Alle Sportarten", emoji: "🏅" },
@@ -52,9 +53,7 @@ function UserCard({ user, distance }: { user: User; distance: number | null }) {
     <div className="mx-4 mb-3 gradient-card rounded-2xl border border-gray-800/50 overflow-hidden animate-fade-in">
       <div className="p-4">
         <div className="flex items-start gap-3">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-2xl flex-shrink-0">
-            {user.avatar}
-          </div>
+          <img src={getAvatarUrl(user.username)} alt={user.username} className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
               <div>

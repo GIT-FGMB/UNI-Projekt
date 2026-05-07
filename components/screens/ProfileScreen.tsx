@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useAppStore, LEVEL_LABELS } from "@/lib/store";
-import { Settings, Grid3X3, MapPin, Calendar, Zap, Clock, CalendarCheck, X } from "lucide-react";
+import { Grid3X3, MapPin, Calendar, Zap, Clock, CalendarCheck, X } from "lucide-react";
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function ProfileScreen() {
   const { currentUser, events, setActiveTab, toggleParticipation } = useAppStore();
@@ -23,9 +24,7 @@ export default function ProfileScreen() {
         {/* Profile header */}
         <div className="px-4 pt-5 pb-4">
           <div className="flex items-center gap-5">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-4xl pulse-green">
-              {currentUser.avatar}
-            </div>
+            <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-20 h-20 rounded-full object-cover pulse-green" />
             <div className="flex-1">
               <div className="flex justify-around text-center">
                 <div>
@@ -103,9 +102,6 @@ export default function ProfileScreen() {
               className="flex-1 bg-gray-800 text-white font-semibold py-2 rounded-lg text-sm hover:bg-gray-700 transition-colors"
             >
               Profil bearbeiten
-            </button>
-            <button className="bg-gray-800 text-white p-2 rounded-lg hover:bg-gray-700 transition-colors">
-              <Settings size={18} />
             </button>
           </div>
         </div>

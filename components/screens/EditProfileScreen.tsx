@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useAppStore } from "@/lib/store";
 import type { SportStats } from "@/lib/store";
-import { ArrowLeft, Save, MapPin, Camera } from "lucide-react";
+import { ArrowLeft, Save, MapPin } from "lucide-react";
+import { getAvatarUrl } from "@/lib/avatar";
 
 const SPORTS = [
   { id: "fussball", label: "Fußball", emoji: "⚽" },
@@ -35,7 +36,6 @@ export default function EditProfileScreen() {
   const [distance, setDistance] = useState(currentUser.sportStats?.distance || "");
   const [strength, setStrength] = useState(currentUser.sportStats?.strength || "");
   const [avatar, setAvatar] = useState(currentUser.avatar);
-  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [locating, setLocating] = useState(false);
@@ -113,37 +113,8 @@ export default function EditProfileScreen() {
       <div className="flex-1 overflow-y-auto phone-scroll pb-24 px-4 pt-4 space-y-5">
         {/* Avatar */}
         <div className="flex flex-col items-center">
-          <button
-            onClick={() => setShowAvatarPicker(!showAvatarPicker)}
-            className="relative group"
-          >
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-4xl">
-              {avatar}
-            </div>
-            <div className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <Camera size={20} className="text-white" />
-            </div>
-          </button>
-          <p className="text-gray-500 text-[10px] mt-1.5">Tippe zum Ändern</p>
-
-          {showAvatarPicker && (
-            <div className="mt-3 bg-gray-900 border border-gray-800 rounded-xl p-3 w-full animate-fade-in">
-              <p className="text-gray-400 text-xs font-medium mb-2">Avatar wählen</p>
-              <div className="grid grid-cols-7 gap-2">
-                {["⚽","🏀","🎾","🏊","🏃","🚴","💪","🧘","🤾","🏐","🏅","🏆","⛷️","🤸","🧗","🏋️","🤺","🏄","🚣","🥊","🏇","😎","🦁","🐺","🦅","🔥","⚡","🌟"].map((e) => (
-                  <button
-                    key={e}
-                    onClick={() => { setAvatar(e); setShowAvatarPicker(false); }}
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl transition-all ${
-                      avatar === e ? "bg-green-500/20 ring-2 ring-green-500 scale-110" : "bg-gray-800 hover:bg-gray-700"
-                    }`}
-                  >
-                    {e}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+          <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-20 h-20 rounded-full object-cover" />
+          <p className="text-gray-500 text-[10px] mt-1.5">Automatisch generiert</p>
         </div>
 
         {/* Basic info */}

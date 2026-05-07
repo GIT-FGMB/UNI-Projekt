@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Heart, MessageCircle, MapPin, Clock, Flame, Ruler, Timer, Send, Loader2 } from "lucide-react";
 import { SportActivity, useAppStore } from "@/lib/store";
 import type { Comment } from "@/lib/store";
+import { getAvatarUrl } from "@/lib/avatar";
 
 const SPORT_EMOJI: Record<string, string> = {
   laufen: "🏃", radfahren: "🚴", fitness: "💪", schwimmen: "🏊",
@@ -72,9 +73,7 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
         onClick={() => setViewUser(activity.userId)}
         className="flex items-center gap-3 px-4 py-3 w-full text-left"
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-lg">
-          {activity.userAvatar}
-        </div>
+        <img src={getAvatarUrl(activity.username)} alt={activity.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
           <p className="text-white text-sm font-semibold">{activity.username}</p>
           <p className="text-gray-500 text-xs">{timeAgo()}</p>
@@ -177,9 +176,7 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
                 <div className="space-y-2.5 mb-3 max-h-48 overflow-y-auto">
                   {comments.map((c) => (
                     <div key={c.id} className="flex gap-2">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs flex-shrink-0">
-                        {c.userAvatar}
-                      </div>
+                      <img src={getAvatarUrl(c.username)} alt={c.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm">
                           <span className="text-white font-semibold mr-1.5">{c.username}</span>
@@ -195,9 +192,7 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
               )}
               {currentUser ? (
                 <div className="flex items-center gap-2 pt-2 border-t border-gray-800/50">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs flex-shrink-0">
-                    {currentUser.avatar}
-                  </div>
+                  <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                   <input type="text" value={commentText} onChange={(e) => setCommentText(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
                     placeholder="Kommentar schreiben..." className="flex-1 bg-transparent text-white text-sm placeholder-gray-600 outline-none" />

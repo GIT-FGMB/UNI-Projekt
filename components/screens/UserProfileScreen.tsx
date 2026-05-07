@@ -5,6 +5,7 @@ import { useAppStore, LEVEL_LABELS } from "@/lib/store";
 import type { User } from "@/lib/store";
 import { ArrowLeft, MapPin, Calendar, Zap, Users, MessageCircle } from "lucide-react";
 import ActivityCard from "@/components/ActivityCard";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function UserProfileScreen() {
   const { viewUserId, setActiveTab, fetchUserById, currentUser, followUser, unfollowUser, activities, openChat } = useAppStore();
@@ -71,9 +72,7 @@ export default function UserProfileScreen() {
         {/* Profile info */}
         <div className="px-4 pt-5 pb-4">
           <div className="flex items-center gap-5">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-4xl">
-              {user.avatar}
-            </div>
+            <img src={getAvatarUrl(user.username)} alt={user.username} className="w-20 h-20 rounded-full object-cover" />
             <div className="flex-1">
               <div className="flex justify-around text-center">
                 <div>

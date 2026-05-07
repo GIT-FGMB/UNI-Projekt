@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Heart, MessageCircle, Share2, MapPin, Calendar, Clock, Send, Loader2 } from "lucide-react";
 import { SportEvent, useAppStore } from "@/lib/store";
 import type { Comment } from "@/lib/store";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function EventCard({ event }: { event: SportEvent }) {
   const { toggleLike, addComment, fetchComments, currentUser, setActiveTab, setViewUser } = useAppStore();
@@ -63,9 +64,7 @@ export default function EventCard({ event }: { event: SportEvent }) {
     <div className="animate-fade-in mb-4">
       {/* User header - clickable */}
       <button onClick={() => setViewUser(event.userId)} className="flex items-center gap-3 px-4 py-3 w-full text-left">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-lg">
-          {event.userAvatar}
-        </div>
+        <img src={getAvatarUrl(event.username)} alt={event.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
           <p className="text-white text-sm font-semibold">{event.username}</p>
           <p className="text-gray-500 text-xs">{timeAgo()}</p>
@@ -143,9 +142,7 @@ export default function EventCard({ event }: { event: SportEvent }) {
                 <div className="space-y-2.5 mb-3 max-h-48 overflow-y-auto">
                   {comments.map((c) => (
                     <div key={c.id} className="flex gap-2">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs flex-shrink-0">
-                        {c.userAvatar}
-                      </div>
+                      <img src={getAvatarUrl(c.username)} alt={c.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm">
                           <span className="text-white font-semibold mr-1.5">{c.username}</span>
@@ -163,9 +160,7 @@ export default function EventCard({ event }: { event: SportEvent }) {
               {/* Comment input */}
               {currentUser ? (
                 <div className="flex items-center gap-2 pt-2 border-t border-gray-800/50">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs flex-shrink-0">
-                    {currentUser.avatar}
-                  </div>
+                  <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                   <input
                     type="text"
                     value={commentText}

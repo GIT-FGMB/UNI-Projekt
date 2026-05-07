@@ -3,6 +3,7 @@
 import { useAppStore } from "@/lib/store";
 import { Calendar, MapPin, Clock, Users } from "lucide-react";
 import Header from "@/components/Header";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function EventsScreen() {
   const { events, currentUser, toggleParticipation, setActiveTab } = useAppStore();
@@ -35,9 +36,7 @@ export default function EventsScreen() {
                   <div className="flex-1">
                     <h3 className="text-white font-semibold text-base">{event.title}</h3>
                     <div className="flex items-center gap-1 mt-1.5">
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs">
-                        {event.userAvatar}
-                      </div>
+                      <img src={getAvatarUrl(event.username)} alt={event.username} className="w-5 h-5 rounded-full object-cover" />
                       <span className="text-gray-400 text-xs">@{event.username}</span>
                     </div>
                   </div>

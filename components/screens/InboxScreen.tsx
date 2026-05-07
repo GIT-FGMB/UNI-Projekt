@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useAppStore } from "@/lib/store";
 import { MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function InboxScreen() {
   const { chats, currentUser, initChats, openChat } = useAppStore();
@@ -59,9 +60,7 @@ export default function InboxScreen() {
                   className="flex items-center gap-3 px-4 py-3 w-full text-left hover:bg-gray-900/50 transition-colors"
                 >
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xl">
-                      {otherAvatar}
-                    </div>
+                    <img src={getAvatarUrl(otherName)} alt={otherName} className="w-12 h-12 rounded-full object-cover" />
                     {unreadCount > 0 && (
                       <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                         {unreadCount}

@@ -2,6 +2,7 @@
 
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import { SportEvent, useAppStore } from "@/lib/store";
+import { getAvatarUrl } from "@/lib/avatar";
 
 const SPORT_EMOJI: Record<string, string> = {
   laufen: "🏃", radfahren: "🚴", fitness: "💪", schwimmen: "🏊",
@@ -32,9 +33,7 @@ export default function EventInfoCard({ event }: { event: SportEvent }) {
         onClick={() => setViewUser(event.userId)}
         className="flex items-center gap-3 px-4 py-3 w-full text-left"
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-lg">
-          {event.userAvatar}
-        </div>
+        <img src={getAvatarUrl(event.username)} alt={event.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <p className="text-white text-sm font-semibold">{event.username}</p>

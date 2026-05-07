@@ -6,6 +6,7 @@ import type { ChatMessage } from "@/lib/store";
 import { ArrowLeft, Send, Loader2 } from "lucide-react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { getAvatarUrl } from "@/lib/avatar";
 
 export default function ChatScreen() {
   const { chatUserId, currentUser, setActiveTab, getOrCreateChat, sendMessage, subscribeMessages, fetchUserById } = useAppStore();
@@ -102,9 +103,7 @@ export default function ChatScreen() {
         <button onClick={goBack} className="text-white">
           <ArrowLeft size={22} />
         </button>
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-300 to-emerald-500 flex items-center justify-center text-base">
-          {partnerAvatar}
-        </div>
+        <img src={getAvatarUrl(partnerName)} alt={partnerName} className="w-8 h-8 rounded-full object-cover" />
         <div className="flex-1">
           <p className="text-white font-semibold text-sm">{partnerName || "..."}</p>
           <p className="text-white/60 text-[10px]">Online</p>
