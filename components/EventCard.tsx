@@ -61,26 +61,26 @@ export default function EventCard({ event }: { event: SportEvent }) {
   };
 
   return (
-    <div className="animate-fade-in mb-4">
+    <div className="animate-fade-in mb-4 bg-white rounded-lg shadow-md">
       {/* User header - clickable */}
       <button onClick={() => setViewUser(event.userId)} className="flex items-center gap-3 px-4 py-3 w-full text-left">
         <img src={getAvatarUrl(event.username)} alt={event.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
-          <p className="text-white text-sm font-semibold">{event.username}</p>
-          <p className="text-gray-500 text-xs">{timeAgo()}</p>
+          <p className="text-gray-900 text-sm font-semibold">{event.username}</p>
+          <p className="text-gray-400 text-xs">{timeAgo()}</p>
         </div>
-        <span className="text-xs px-2.5 py-1 rounded-full bg-green-500/15 text-green-400 font-medium capitalize">
+        <span className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 font-medium capitalize border border-blue-200">
           {event.sport}
         </span>
       </button>
 
       {/* Event image/gradient */}
-      <div className={`w-full aspect-[4/3] bg-gradient-to-br ${event.image} relative flex flex-col items-center justify-center`}>
+      <div className="w-full aspect-[4/3] bg-blue-50 border-y border-blue-100 relative flex flex-col items-center justify-center">
         <span className="text-6xl mb-3">
           {event.sport === "fussball" ? "⚽" : event.sport === "fitness" ? "💪" : event.sport === "laufen" ? "🏃" : event.sport === "yoga" ? "🧘" : event.sport === "radfahren" ? "🚴" : "🏅"}
         </span>
-        <h3 className="text-white text-lg font-bold text-center px-6 drop-shadow-lg">{event.title}</h3>
-        <div className="flex items-center gap-4 mt-3 text-white/80 text-xs">
+        <h3 className="text-gray-900 text-lg font-bold text-center px-6">{event.title}</h3>
+        <div className="flex items-center gap-4 mt-3 text-gray-500 text-xs">
           <span className="flex items-center gap-1"><Calendar size={12} /> {event.date}</span>
           <span className="flex items-center gap-1"><Clock size={12} /> {event.time}</span>
         </div>
@@ -91,27 +91,27 @@ export default function EventCard({ event }: { event: SportEvent }) {
         <button onClick={handleLike} className="flex items-center gap-1.5 transition-all duration-200 active:scale-125">
           <Heart
             size={24}
-            className={event.liked ? "fill-red-500 text-red-500" : "text-white"}
+            className={event.liked ? "fill-red-500 text-red-500" : "text-gray-600"}
             strokeWidth={event.liked ? 0 : 1.5}
           />
         </button>
         <button onClick={handleToggleComments} className="flex items-center gap-1.5 transition-all duration-200 active:scale-110">
-          <MessageCircle size={24} className={showComments ? "text-green-400" : "text-white"} strokeWidth={1.5} />
+          <MessageCircle size={24} className={showComments ? "text-blue-600" : "text-gray-600"} strokeWidth={1.5} />
         </button>
         <button className="flex items-center gap-1.5">
-          <Share2 size={24} className="text-white" strokeWidth={1.5} />
+          <Share2 size={24} className="text-gray-600" strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Likes */}
       <div className="px-4">
-        <p className="text-white text-sm font-semibold">{event.likes} Gefällt mir</p>
+        <p className="text-gray-900 text-sm font-semibold">{event.likes} Gefällt mir</p>
       </div>
 
       {/* Description */}
       <div className="px-4 py-2">
-        <p className="text-gray-300 text-sm">
-          <span className="font-semibold text-white mr-1">{event.username}</span>
+        <p className="text-gray-600 text-sm">
+          <span className="font-semibold text-gray-900 mr-1">{event.username}</span>
           {event.description}
         </p>
       </div>
@@ -145,8 +145,8 @@ export default function EventCard({ event }: { event: SportEvent }) {
                       <img src={getAvatarUrl(c.username)} alt={c.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm">
-                          <span className="text-white font-semibold mr-1.5">{c.username}</span>
-                          <span className="text-gray-300">{c.text}</span>
+                          <span className="text-gray-900 font-semibold mr-1.5">{c.username}</span>
+                          <span className="text-gray-600">{c.text}</span>
                         </p>
                         <p className="text-gray-600 text-[10px] mt-0.5">{commentTimeAgo(c.createdAt)}</p>
                       </div>
@@ -159,7 +159,7 @@ export default function EventCard({ event }: { event: SportEvent }) {
 
               {/* Comment input */}
               {currentUser ? (
-                <div className="flex items-center gap-2 pt-2 border-t border-gray-800/50">
+                <div className="flex items-center gap-2 pt-2 border-t border-gray-200">
                   <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                   <input
                     type="text"
@@ -167,12 +167,12 @@ export default function EventCard({ event }: { event: SportEvent }) {
                     onChange={(e) => setCommentText(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
                     placeholder="Kommentar schreiben..."
-                    className="flex-1 bg-transparent text-white text-sm placeholder-gray-600 outline-none"
+                    className="flex-1 bg-transparent text-gray-900 text-sm placeholder-gray-400 outline-none"
                   />
                   <button
                     onClick={handleAddComment}
                     disabled={!commentText.trim() || sending}
-                    className={`transition-all ${commentText.trim() ? "text-green-400" : "text-gray-700"}`}
+                    className={`transition-all ${commentText.trim() ? "text-blue-600" : "text-gray-300"}`}
                   >
                     {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                   </button>
@@ -187,7 +187,7 @@ export default function EventCard({ event }: { event: SportEvent }) {
         </div>
       )}
 
-      <div className="h-px bg-gray-800/50 mx-4" />
+      <div className="h-px bg-gray-200 mx-4" />
     </div>
   );
 }

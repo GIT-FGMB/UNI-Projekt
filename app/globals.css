@@ -15,7 +15,7 @@
 }
 
 body {
-  background: #1a1a2e;
+  background: #f0f0f5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   display: flex;
   justify-content: center;
@@ -33,7 +33,7 @@ body {
 }
 
 .phone-scroll::-webkit-scrollbar-thumb {
-  background: rgba(34, 197, 94, 0.3);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
@@ -67,9 +67,10 @@ body {
 
 /* Gradient backgrounds */
 .gradient-card {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: #ffffff;
 }
 
 .gradient-header {
-  background: linear-gradient(135deg, #166534 0%, #15803d 50%, #22c55e 100%);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }

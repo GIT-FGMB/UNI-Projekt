@@ -30,13 +30,13 @@ export default function FeedScreen() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-16">
             <div className="text-4xl animate-bounce">🏅</div>
-            <p className="text-gray-400 text-sm mt-3">Feed wird geladen...</p>
+            <p className="text-gray-500 text-sm mt-3">Feed wird geladen...</p>
           </div>
         ) : feedItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 px-8">
             <div className="text-5xl mb-4">📭</div>
-            <h3 className="text-white font-semibold text-lg">Noch nichts hier</h3>
-            <p className="text-gray-400 text-sm text-center mt-2">
+            <h3 className="text-gray-900 font-semibold text-lg">Noch nichts hier</h3>
+            <p className="text-gray-500 text-sm text-center mt-2">
               Poste deine erste Sporteinheit oder erstelle ein Event!
             </p>
           </div>

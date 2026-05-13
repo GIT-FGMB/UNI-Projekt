@@ -48,11 +48,13 @@ export interface User {
   avatar: string;
   bio: string;
   sport: string;
+  sports: string[];
   age: number;
   latitude: number;
   longitude: number;
   city: string;
   sportStats: SportStats;
+  sportsStats: Record<string, SportStats>;
   followers: number;
   following: number;
   followingList: string[];
@@ -123,6 +125,7 @@ interface AppState {
   nearbyUsers: User[];
   activeTab: string;
   viewUserId: string | null;
+  viewEventId: string | null;
   chatUserId: string | null;
   chats: Chat[];
   loading: boolean;
@@ -133,6 +136,7 @@ interface AppState {
   logout: () => Promise<void>;
   setActiveTab: (tab: string) => void;
   setViewUser: (userId: string) => void;
+  setViewEvent: (eventId: string) => void;
   addEvent: (event: Omit<SportEvent, "id" | "userId" | "username" | "userAvatar" | "likes" | "comments" | "liked" | "likedBy" | "participants" | "createdAt">) => Promise<void>;
   toggleLike: (eventId: string) => Promise<void>;
   toggleParticipation: (eventId: string) => Promise<void>;
@@ -148,7 +152,7 @@ interface AppState {
   updateUserLocation: (lat: number, lng: number, city: string) => Promise<void>;
   followUser: (targetUserId: string) => Promise<void>;
   unfollowUser: (targetUserId: string) => Promise<void>;
-  updateProfile: (data: Partial<Pick<User, "bio" | "displayName" | "city" | "age" | "sport" | "sportStats" | "avatar">>) => Promise<void>;
+  updateProfile: (data: Partial<Pick<User, "bio" | "displayName" | "city" | "age" | "sport" | "sports" | "sportStats" | "sportsStats" | "avatar">>) => Promise<void>;
   addComment: (eventId: string, text: string) => Promise<void>;
   fetchComments: (eventId: string) => Promise<Comment[]>;
   openChat: (targetUserId: string) => void;
@@ -165,11 +169,13 @@ export interface RegisterData {
   displayName: string;
   username: string;
   sport: string;
+  sports: string[];
   age: number;
   city: string;
   latitude: number;
   longitude: number;
   sportStats: SportStats;
+  sportsStats: Record<string, SportStats>;
 }
 
 const SPORT_AVATARS: Record<string, string> = {
@@ -217,6 +223,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   nearbyUsers: [],
   activeTab: "feed",
   viewUserId: null,
+  viewEventId: null,
   chatUserId: null,
   chats: [],
   loading: true,
@@ -279,14 +286,16 @@ export const useAppStore = create<AppState>((set, get) => ({
       const userProfile: Omit<User, "id"> = {
         username: data.username,
         displayName: data.displayName,
-        avatar: SPORT_AVATARS[data.sport] || "🏅",
+        avatar: SPORT_AVATARS[data.sports[0] || data.sport] || "🏅",
         bio: "",
-        sport: data.sport,
+        sport: data.sports[0] || data.sport,
+        sports: data.sports.length > 0 ? data.sports : [data.sport],
         age: data.age,
         latitude: data.latitude,
         longitude: data.longitude,
         city: data.city,
         sportStats: data.sportStats,
+        sportsStats: data.sportsStats || {},
         followers: 0,
         following: 0,
         followingList: [],
@@ -314,6 +323,10 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   setViewUser: (userId: string) => {
     set({ viewUserId: userId, activeTab: "userprofile" });
+  },
+
+  setViewEvent: (eventId: string) => {
+    set({ viewEventId: eventId, activeTab: "eventdetail" });
   },
 
   addEvent: async (eventData) => {

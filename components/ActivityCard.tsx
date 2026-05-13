@@ -75,56 +75,56 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
       >
         <img src={getAvatarUrl(activity.username)} alt={activity.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
-          <p className="text-white text-sm font-semibold">{activity.username}</p>
-          <p className="text-gray-500 text-xs">{timeAgo()}</p>
+          <p className="text-gray-900 text-sm font-semibold">{activity.username}</p>
+          <p className="text-gray-400 text-xs">{timeAgo()}</p>
         </div>
-        <span className="text-xs px-2.5 py-1 rounded-full bg-green-500/15 text-green-400 font-medium capitalize">
+        <span className="text-xs px-2.5 py-1 rounded-full bg-green-50 text-green-600 font-medium capitalize border border-green-200">
           {activity.sport}
         </span>
       </button>
 
       {/* Activity gradient card */}
-      <div className={`w-full bg-gradient-to-br ${activity.image} relative p-5`}>
+      <div className="w-full bg-green-50 border-y border-green-100 relative p-5">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-3xl">{SPORT_EMOJI[activity.sport] || "🏅"}</span>
-          <h3 className="text-white text-lg font-bold drop-shadow-lg">{activity.title}</h3>
+          <h3 className="text-gray-900 text-lg font-bold">{activity.title}</h3>
         </div>
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-2 mt-3">
           {activity.duration && (
-            <div className="bg-black/25 backdrop-blur-sm rounded-xl p-2.5 flex items-center gap-2">
-              <Timer size={16} className="text-white/80" />
+            <div className="bg-white rounded-xl p-2.5 flex items-center gap-2 border border-green-200">
+              <Timer size={16} className="text-green-600" />
               <div>
-                <p className="text-white/60 text-[10px]">Dauer</p>
-                <p className="text-white font-semibold text-sm">{activity.duration}</p>
+                <p className="text-gray-400 text-[10px]">Dauer</p>
+                <p className="text-gray-900 font-semibold text-sm">{activity.duration}</p>
               </div>
             </div>
           )}
           {activity.distance && (
-            <div className="bg-black/25 backdrop-blur-sm rounded-xl p-2.5 flex items-center gap-2">
-              <Ruler size={16} className="text-white/80" />
+            <div className="bg-white rounded-xl p-2.5 flex items-center gap-2 border border-green-200">
+              <Ruler size={16} className="text-green-600" />
               <div>
-                <p className="text-white/60 text-[10px]">Distanz</p>
-                <p className="text-white font-semibold text-sm">{activity.distance}</p>
+                <p className="text-gray-400 text-[10px]">Distanz</p>
+                <p className="text-gray-900 font-semibold text-sm">{activity.distance}</p>
               </div>
             </div>
           )}
           {activity.pace && (
-            <div className="bg-black/25 backdrop-blur-sm rounded-xl p-2.5 flex items-center gap-2">
-              <Clock size={16} className="text-white/80" />
+            <div className="bg-white rounded-xl p-2.5 flex items-center gap-2 border border-green-200">
+              <Clock size={16} className="text-green-600" />
               <div>
-                <p className="text-white/60 text-[10px]">Tempo</p>
-                <p className="text-white font-semibold text-sm">{activity.pace}</p>
+                <p className="text-gray-400 text-[10px]">Tempo</p>
+                <p className="text-gray-900 font-semibold text-sm">{activity.pace}</p>
               </div>
             </div>
           )}
           {activity.calories && (
-            <div className="bg-black/25 backdrop-blur-sm rounded-xl p-2.5 flex items-center gap-2">
-              <Flame size={16} className="text-white/80" />
+            <div className="bg-white rounded-xl p-2.5 flex items-center gap-2 border border-green-200">
+              <Flame size={16} className="text-green-600" />
               <div>
-                <p className="text-white/60 text-[10px]">Kalorien</p>
-                <p className="text-white font-semibold text-sm">{activity.calories}</p>
+                <p className="text-gray-400 text-[10px]">Kalorien</p>
+                <p className="text-gray-900 font-semibold text-sm">{activity.calories}</p>
               </div>
             </div>
           )}
@@ -134,23 +134,23 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
       {/* Action buttons */}
       <div className="flex items-center gap-4 px-4 py-3">
         <button onClick={handleLike} className="flex items-center gap-1.5 transition-all duration-200 active:scale-125">
-          <Heart size={24} className={activity.liked ? "fill-red-500 text-red-500" : "text-white"} strokeWidth={activity.liked ? 0 : 1.5} />
+          <Heart size={24} className={activity.liked ? "fill-red-500 text-red-500" : "text-gray-600"} strokeWidth={activity.liked ? 0 : 1.5} />
         </button>
         <button onClick={handleToggleComments} className="flex items-center gap-1.5 transition-all duration-200 active:scale-110">
-          <MessageCircle size={24} className={showComments ? "text-green-400" : "text-white"} strokeWidth={1.5} />
+          <MessageCircle size={24} className={showComments ? "text-green-600" : "text-gray-600"} strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Likes */}
       <div className="px-4">
-        <p className="text-white text-sm font-semibold">{activity.likes} Gefällt mir</p>
+        <p className="text-gray-900 text-sm font-semibold">{activity.likes} Gefällt mir</p>
       </div>
 
       {/* Description */}
       {activity.description && (
         <div className="px-4 py-2">
-          <p className="text-gray-300 text-sm">
-            <span className="font-semibold text-white mr-1">{activity.username}</span>
+          <p className="text-gray-600 text-sm">
+            <span className="font-semibold text-gray-900 mr-1">{activity.username}</span>
             {activity.description}
           </p>
         </div>
@@ -179,8 +179,8 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
                       <img src={getAvatarUrl(c.username)} alt={c.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm">
-                          <span className="text-white font-semibold mr-1.5">{c.username}</span>
-                          <span className="text-gray-300">{c.text}</span>
+                          <span className="text-gray-900 font-semibold mr-1.5">{c.username}</span>
+                          <span className="text-gray-600">{c.text}</span>
                         </p>
                         <p className="text-gray-600 text-[10px] mt-0.5">{commentTimeAgo(c.createdAt)}</p>
                       </div>
@@ -191,13 +191,13 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
                 <p className="text-gray-600 text-xs py-2">Noch keine Kommentare. Schreib den ersten!</p>
               )}
               {currentUser ? (
-                <div className="flex items-center gap-2 pt-2 border-t border-gray-800/50">
+                <div className="flex items-center gap-2 pt-2 border-t border-gray-200">
                   <img src={getAvatarUrl(currentUser.username)} alt={currentUser.username} className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
                   <input type="text" value={commentText} onChange={(e) => setCommentText(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
-                    placeholder="Kommentar schreiben..." className="flex-1 bg-transparent text-white text-sm placeholder-gray-600 outline-none" />
+                    placeholder="Kommentar schreiben..." className="flex-1 bg-transparent text-gray-900 text-sm placeholder-gray-400 outline-none" />
                   <button onClick={handleAddComment} disabled={!commentText.trim() || sending}
-                    className={`transition-all ${commentText.trim() ? "text-green-400" : "text-gray-700"}`}>
+                    className={`transition-all ${commentText.trim() ? "text-green-600" : "text-gray-300"}`}>
                     {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                   </button>
                 </div>
@@ -209,7 +209,7 @@ export default function ActivityCard({ activity }: { activity: SportActivity }) 
         </div>
       )}
 
-      <div className="h-px bg-gray-800/50 mx-4" />
+      <div className="h-px bg-gray-200 mx-4" />
     </div>
   );
 }

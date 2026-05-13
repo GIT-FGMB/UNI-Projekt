@@ -15,6 +15,7 @@ import EditProfileScreen from "@/components/screens/EditProfileScreen";
 import UserProfileScreen from "@/components/screens/UserProfileScreen";
 import ChatScreen from "@/components/screens/ChatScreen";
 import InboxScreen from "@/components/screens/InboxScreen";
+import EventDetailScreen from "@/components/screens/EventDetailScreen";
 import { useAppStore } from "@/lib/store";
 
 export default function Home() {
@@ -73,12 +74,14 @@ export default function Home() {
         return <ChatScreen />;
       case "inbox":
         return <InboxScreen />;
+      case "eventdetail":
+        return <EventDetailScreen />;
       default:
         return <FeedScreen />;
     }
   };
 
-  const showNav = !["login", "register", "editprofile", "userprofile", "chat"].includes(activeTab);
+  const showNav = !["login", "register", "editprofile", "userprofile", "chat", "eventdetail"].includes(activeTab);
 
   return (
     <PhoneFrame>

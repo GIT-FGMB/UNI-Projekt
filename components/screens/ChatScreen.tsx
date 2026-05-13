@@ -97,16 +97,16 @@ export default function ChatScreen() {
   });
 
   return (
-    <div className="h-full flex flex-col bg-gray-950">
+    <div className="h-full flex flex-col bg-white">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-12 pb-3 bg-gradient-to-r from-green-600 to-emerald-700">
-        <button onClick={goBack} className="text-white">
+      <div className="flex items-center gap-3 px-4 pt-12 pb-3 bg-white border-b border-gray-200">
+        <button onClick={goBack} className="text-gray-700">
           <ArrowLeft size={22} />
         </button>
         <img src={getAvatarUrl(partnerName)} alt={partnerName} className="w-8 h-8 rounded-full object-cover" />
         <div className="flex-1">
-          <p className="text-white font-semibold text-sm">{partnerName || "..."}</p>
-          <p className="text-white/60 text-[10px]">Online</p>
+          <p className="text-gray-900 font-semibold text-sm">{partnerName || "..."}</p>
+          <p className="text-gray-400 text-[10px]">Online</p>
         </div>
       </div>
 
@@ -114,18 +114,18 @@ export default function ChatScreen() {
       <div ref={scrollRef} className="flex-1 overflow-y-auto phone-scroll px-4 py-3 space-y-1">
         {loading ? (
           <div className="flex items-center justify-center h-full">
-            <Loader2 size={24} className="text-green-400 animate-spin" />
+            <Loader2 size={24} className="text-gray-400 animate-spin" />
           </div>
         ) : messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="text-5xl mb-3">👋</div>
-            <p className="text-gray-400 text-sm text-center">Schreib die erste Nachricht!</p>
+            <p className="text-gray-500 text-sm text-center">Schreib die erste Nachricht!</p>
           </div>
         ) : (
           groupedMessages.map((group) => (
             <div key={group.date}>
               <div className="flex justify-center my-3">
-                <span className="text-[10px] text-gray-500 bg-gray-900 px-3 py-1 rounded-full">
+                <span className="text-[10px] text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                   {formatDateSeparator(group.messages[0].createdAt)}
                 </span>
               </div>
@@ -136,12 +136,12 @@ export default function ChatScreen() {
                     <div
                       className={`max-w-[75%] px-3.5 py-2 rounded-2xl ${
                         isMine
-                          ? "bg-green-600 text-white rounded-br-md"
-                          : "bg-gray-800 text-white rounded-bl-md"
+                          ? "bg-gray-900 text-white rounded-br-md"
+                          : "bg-gray-100 text-gray-900 rounded-bl-md"
                       }`}
                     >
                       <p className="text-sm break-words">{msg.text}</p>
-                      <p className={`text-[9px] mt-0.5 ${isMine ? "text-green-200/60" : "text-gray-500"} text-right`}>
+                      <p className={`text-[9px] mt-0.5 ${isMine ? "text-gray-300" : "text-gray-400"} text-right`}>
                         {formatTime(msg.createdAt)}
                       </p>
                     </div>
@@ -154,7 +154,7 @@ export default function ChatScreen() {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-3 bg-gray-900 border-t border-gray-800">
+      <div className="px-4 py-3 bg-white border-t border-gray-200">
         <div className="flex items-center gap-2">
           <input
             type="text"
@@ -162,13 +162,13 @@ export default function ChatScreen() {
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Nachricht schreiben..."
-            className="flex-1 bg-gray-800 text-white text-sm px-4 py-2.5 rounded-full placeholder-gray-500 outline-none focus:ring-1 focus:ring-green-500"
+            className="flex-1 bg-gray-100 text-gray-900 text-sm px-4 py-2.5 rounded-full placeholder-gray-400 outline-none focus:ring-1 focus:ring-gray-300"
           />
           <button
             onClick={handleSend}
             disabled={!text.trim() || sending}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-              text.trim() ? "bg-green-500 text-white" : "bg-gray-800 text-gray-600"
+              text.trim() ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-400"
             }`}
           >
             {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}

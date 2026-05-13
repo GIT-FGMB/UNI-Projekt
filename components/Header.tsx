@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div className="gradient-header px-4 py-3 pt-12 flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <h1 className="text-white text-xl font-bold tracking-tight">SportsFreunde</h1>
+        <h1 className="text-gray-900 text-xl font-bold tracking-tight">SportsFreunde</h1>
       </div>
       <div className="flex items-center gap-3">
         {currentUser ? (
@@ -19,7 +19,7 @@ export default function Header() {
                 await logout();
                 setActiveTab("feed");
               }}
-              className="text-white/80 hover:text-white"
+              className="text-gray-400 hover:text-gray-700"
             >
               <LogOut size={20} />
             </button>
@@ -27,7 +27,7 @@ export default function Header() {
         ) : (
           <button
             onClick={() => setActiveTab("login")}
-            className="text-white text-sm font-semibold bg-white/20 px-4 py-1.5 rounded-full hover:bg-white/30 transition-colors"
+            className="text-gray-700 text-sm font-semibold bg-gray-100 px-4 py-1.5 rounded-full hover:bg-gray-200 transition-colors"
           >
             Anmelden
           </button>

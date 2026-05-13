@@ -32,19 +32,19 @@ export default function SearchScreen() {
   });
 
   return (
-    <div className="h-full flex flex-col bg-gray-950">
+    <div className="h-full flex flex-col bg-white">
       <Header />
       <div className="flex-1 overflow-y-auto phone-scroll pb-24">
         {/* Search bar */}
         <div className="px-4 pt-3 pb-2">
-          <div className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-xl px-3 py-2.5">
+          <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
             <Search size={18} className="text-gray-400 flex-shrink-0" />
             <input
               type="text"
               placeholder="Events, Sportarten, Orte suchen..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="bg-transparent text-white placeholder-gray-500 focus:outline-none flex-1 text-sm"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 transition-all text-sm"
             />
           </div>
         </div>
@@ -55,10 +55,10 @@ export default function SearchScreen() {
             <button
               key={s.id}
               onClick={() => setFilter(s.id)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 filter === s.id
-                  ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                  : "bg-gray-900 text-gray-400 border border-gray-800"
+                  ? "bg-gray-200 text-gray-900 border border-gray-300"
+                  : "bg-gray-100 text-gray-500 border border-transparent"
               }`}
             >
               <span>{s.emoji}</span>
@@ -76,7 +76,7 @@ export default function SearchScreen() {
           ) : (
             <div className="flex flex-col items-center justify-center py-16 px-8">
               <div className="text-5xl mb-4">🔍</div>
-              <h3 className="text-white font-semibold text-lg">Keine Ergebnisse</h3>
+              <h2 className="text-xl font-bold text-gray-900">Keine Ergebnisse</h2>
               <p className="text-gray-400 text-sm text-center mt-2">
                 Versuche einen anderen Suchbegriff oder Filter.
               </p>

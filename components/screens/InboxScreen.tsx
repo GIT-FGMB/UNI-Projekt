@@ -17,20 +17,20 @@ export default function InboxScreen() {
   if (!currentUser) return null;
 
   return (
-    <div className="h-full flex flex-col bg-gray-950">
+    <div className="h-full flex flex-col bg-white">
       <Header />
       <div className="flex-1 overflow-y-auto phone-scroll pb-24">
         <div className="px-4 pt-4 pb-2">
-          <h2 className="text-xl font-bold text-white">Nachrichten</h2>
+          <h2 className="text-xl font-bold text-gray-900">Nachrichten</h2>
         </div>
 
         {chats.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 px-8">
-            <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mb-4">
-              <MessageCircle size={32} className="text-gray-600" />
+            <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <MessageCircle size={32} className="text-gray-400" />
             </div>
-            <h3 className="text-white font-semibold text-lg">Noch keine Nachrichten</h3>
-            <p className="text-gray-400 text-sm text-center mt-2">
+            <h3 className="text-gray-900 font-semibold text-lg">Noch keine Nachrichten</h3>
+            <p className="text-gray-500 text-sm text-center mt-2">
               Geh auf ein Profil und schreib jemandem eine Nachricht!
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function InboxScreen() {
                 <button
                   key={chat.id}
                   onClick={() => openChat(otherId)}
-                  className="flex items-center gap-3 px-4 py-3 w-full text-left hover:bg-gray-900/50 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 w-full text-left hover:bg-gray-50 transition-colors"
                 >
                   <div className="relative">
                     <img src={getAvatarUrl(otherName)} alt={otherName} className="w-12 h-12 rounded-full object-cover" />
@@ -69,12 +69,12 @@ export default function InboxScreen() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <p className={`text-sm font-semibold ${unreadCount > 0 ? "text-white" : "text-gray-300"}`}>
+                      <p className={`text-sm font-semibold ${unreadCount > 0 ? "text-gray-900" : "text-gray-600"}`}>
                         {otherName}
                       </p>
                       <span className="text-gray-500 text-[10px]">{timeAgo()}</span>
                     </div>
-                    <p className={`text-xs mt-0.5 truncate ${unreadCount > 0 ? "text-gray-300 font-medium" : "text-gray-500"}`}>
+                    <p className={`text-xs mt-0.5 truncate ${unreadCount > 0 ? "text-gray-600 font-medium" : "text-gray-400"}`}>
                       {chat.lastMessage || "Noch keine Nachricht"}
                     </p>
                   </div>
