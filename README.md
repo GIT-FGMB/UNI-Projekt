@@ -9,8 +9,7 @@ Ein interaktiver Web-Prototyp einer Sport-Community-App, entwickelt im Rahmen ei
 - [Technologie-Stack](#technologie-stack)
 - [Projektstruktur](#projektstruktur)
 - [Installation & Setup](#Schnellstart)
-- [Firebase-Konfiguration](#firebase-konfiguration)
-- [Starten der Anwendung](#starten-der-anwendung)
+- [Firebase-Konfiguration](#firebase)
 
 ## Überblick
 
@@ -84,7 +83,7 @@ Web-Prototyp/
 **Keine Vorkenntnisse oder Installationen nötig:**
 
 1. Repository herunterladen oder klonen
-2. `start.bat` doppelklicken
+2. Unter C:\Users\%UserName%\CascadeProjects\UNI Projekt\Web-Prototyp die `start.bat` doppelklicken 
 3. Beim ersten Start wird automatisch alles eingerichtet (Node.js, Abhängigkeiten)
 4. Die App öffnet sich automatisch im Browser
 
