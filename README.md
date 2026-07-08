@@ -8,7 +8,7 @@ Ein interaktiver Web-Prototyp einer Sport-Community-App, entwickelt im Rahmen ei
 - [Features](#features)
 - [Technologie-Stack](#technologie-stack)
 - [Projektstruktur](#projektstruktur)
-- [Installation & Setup](#installation--setup)
+- [Installation & Setup](#Schnellstart)
 - [Firebase-Konfiguration](#firebase-konfiguration)
 - [Starten der Anwendung](#starten-der-anwendung)
 
@@ -79,7 +79,7 @@ Web-Prototyp/
 └── next.config.js
 ```
 
-## Schnellstart (empfohlen)
+## Schnellstart
 
 **Keine Vorkenntnisse oder Installationen nötig:**
 
