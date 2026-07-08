@@ -155,7 +155,7 @@ export default function RegisterScreen() {
             <div
               key={s}
               className={`flex-1 h-1 rounded-full transition-all ${
-                s <= step ? "bg-gray-900" : "bg-gray-200"
+                s <= step ? "bg-olive-700" : "bg-gray-200"
               }`}
             />
           ))}
@@ -190,7 +190,7 @@ export default function RegisterScreen() {
                 }
                 setError(""); setStep(2);
               }}
-              className="w-full bg-gray-900 text-white font-semibold py-3.5 rounded-xl"
+              className="w-full bg-olive-700 text-white font-semibold py-3.5 rounded-xl"
             >
               Weiter
             </button>
@@ -242,7 +242,7 @@ export default function RegisterScreen() {
                     }}
                     className={`flex items-center gap-2 p-3 rounded-xl border transition-all ${
                       sports.includes(s.id)
-                        ? "border-gray-900 bg-gray-100 text-gray-900"
+                        ? "border-olive-700 bg-olive-50 text-olive-800"
                         : "border-gray-200 bg-gray-50 text-gray-500 hover:border-gray-300"
                     }`}
                   >
@@ -266,7 +266,7 @@ export default function RegisterScreen() {
               disabled={sports.length === 0 || !age}
               className={`w-full font-semibold py-3.5 rounded-xl transition-all ${
                 sports.length > 0 && age
-                  ? "bg-gray-900 text-white"
+                  ? "bg-olive-700 text-white"
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               }`}
             >
@@ -309,7 +309,7 @@ export default function RegisterScreen() {
                           onClick={() => updateSportStat(sportId, "level", l.id)}
                           className={`flex flex-col items-center gap-0.5 p-2 rounded-lg border transition-all ${
                             stat.level === l.id
-                              ? "border-gray-900 bg-gray-100 text-gray-900"
+                              ? "border-olive-700 bg-olive-50 text-olive-800"
                               : "border-gray-200 bg-white text-gray-500"
                           }`}
                         >
@@ -330,7 +330,7 @@ export default function RegisterScreen() {
                           onClick={() => updateSportStat(sportId, "frequency", f)}
                           className={`flex-1 py-1.5 rounded-lg text-[9px] font-medium transition-all ${
                             stat.frequency === f
-                              ? "bg-gray-100 text-gray-900 border border-gray-900"
+                              ? "bg-olive-50 text-olive-800 border border-olive-700"
                               : "bg-gray-100 text-gray-500 border border-transparent"
                           }`}
                         >
@@ -368,7 +368,7 @@ export default function RegisterScreen() {
               disabled={loading}
               className={`w-full font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 ${
                 !loading
-                  ? "bg-gray-900 text-white"
+                  ? "bg-olive-700 text-white"
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               }`}
             >

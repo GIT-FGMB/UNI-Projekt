@@ -19,7 +19,7 @@ const SPORT_LABELS: Record<string, string> = {
 };
 
 export default function EventDetailScreen() {
-  const { viewEventId, events, currentUser, toggleParticipation, setActiveTab, setViewUser, fetchUserById, openChat } = useAppStore();
+  const { viewEventId, events, currentUser, toggleParticipation, setActiveTab, previousTab, setViewUser, fetchUserById, openChat } = useAppStore();
   const [host, setHost] = useState<User | null>(null);
 
   const event = events.find((e) => e.id === viewEventId) || null;
@@ -34,7 +34,7 @@ export default function EventDetailScreen() {
     return (
       <div className="h-full flex flex-col bg-white items-center justify-center">
         <p className="text-gray-500">Event nicht gefunden</p>
-        <button onClick={() => setActiveTab("feed")} className="text-blue-600 mt-3 text-sm">Zurück zum Feed</button>
+        <button onClick={() => setActiveTab(previousTab || "feed")} className="text-olive-700 mt-3 text-sm">Zurück</button>
       </div>
     );
   }
@@ -48,7 +48,7 @@ export default function EventDetailScreen() {
     <div className="h-full flex flex-col bg-white">
       {/* Header */}
       <div className="flex items-center gap-3 px-4 pt-12 pb-3 bg-white border-b border-gray-200">
-        <button onClick={() => setActiveTab("feed")} className="text-gray-700">
+        <button onClick={() => setActiveTab(previousTab || "feed")} className="text-gray-700">
           <ArrowLeft size={22} />
         </button>
         <h2 className="text-gray-900 font-bold flex-1 truncate">{event.title}</h2>
@@ -56,7 +56,7 @@ export default function EventDetailScreen() {
 
       <div className="flex-1 overflow-y-auto phone-scroll pb-28">
         {/* Hero image / gradient */}
-        <div className="w-full h-48 bg-blue-50 border-b border-blue-100 flex items-center justify-center">
+        <div className="w-full h-48 bg-olive-50 border-b border-olive-100 flex items-center justify-center">
           <span className="text-7xl drop-shadow-lg">{sportEmoji}</span>
         </div>
 
@@ -64,7 +64,7 @@ export default function EventDetailScreen() {
         <div className="px-4 pt-5 pb-4">
           {/* Sport + Title */}
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 font-medium capitalize border border-blue-200">
+            <span className="text-xs px-2.5 py-1 rounded-full bg-olive-50 text-olive-700 font-medium capitalize border border-olive-200">
               {sportLabel}
             </span>
           </div>
@@ -73,17 +73,17 @@ export default function EventDetailScreen() {
           {/* Meta info */}
           <div className="mt-4 space-y-2.5">
             <div className="flex items-center gap-3 text-gray-600 text-sm">
-              <Calendar size={16} className="text-blue-500 flex-shrink-0" />
+              <Calendar size={16} className="text-olive-600 flex-shrink-0" />
               <span>{event.date}</span>
-              <Clock size={16} className="text-blue-500 flex-shrink-0 ml-2" />
+              <Clock size={16} className="text-olive-600 flex-shrink-0 ml-2" />
               <span>{event.time}</span>
             </div>
             <div className="flex items-center gap-3 text-gray-600 text-sm">
-              <MapPin size={16} className="text-blue-500 flex-shrink-0" />
+              <MapPin size={16} className="text-olive-600 flex-shrink-0" />
               <span>{event.location}</span>
             </div>
             <div className="flex items-center gap-3 text-gray-600 text-sm">
-              <Users size={16} className="text-blue-500 flex-shrink-0" />
+              <Users size={16} className="text-olive-600 flex-shrink-0" />
               <span>{participantCount} Teilnehmer</span>
             </div>
           </div>
@@ -137,8 +137,8 @@ export default function EventDetailScreen() {
           }}
           className={`w-full font-semibold py-3.5 rounded-xl text-base transition-all active:scale-[0.98] ${
             isParticipant
-              ? "bg-blue-50 text-blue-600 border border-blue-200"
-              : "bg-blue-500 text-white"
+              ? "bg-terra-50 text-terra-500 border border-terra-200"
+              : "bg-terra-400 text-white"
           }`}
         >
           {isParticipant ? "✓ Du nimmst teil" : "Teilnehmen"}

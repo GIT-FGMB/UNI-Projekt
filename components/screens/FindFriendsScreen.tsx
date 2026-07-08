@@ -35,7 +35,7 @@ const LEVEL_OPTIONS = [
 ];
 
 function UserCard({ user, distance }: { user: User; distance: number | null }) {
-  const { currentUser, followUser, unfollowUser } = useAppStore();
+  const { currentUser, followUser, unfollowUser, setViewUser, openChat } = useAppStore();
   const isFollowing = (currentUser?.followingList || []).includes(user.id);
   const [loading, setLoading] = useState(false);
 
@@ -50,18 +50,29 @@ function UserCard({ user, distance }: { user: User; distance: number | null }) {
   };
 
   return (
-    <div className="mx-4 mb-3 bg-white rounded-2xl border border-gray-200 overflow-hidden animate-fade-in">
+    <div className="mx-4 mb-3 bg-olive-600 rounded-2xl border border-olive-500 overflow-hidden animate-fade-in">
       <div className="p-4">
         <div className="flex items-start gap-3">
-          <img src={getAvatarUrl(user.username)} alt={user.username} className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
+          <img
+            src={getAvatarUrl(user.username)}
+            alt={user.username}
+            className="w-14 h-14 rounded-full object-cover flex-shrink-0 cursor-pointer"
+            onClick={() => setViewUser(user.id)}
+          />
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-gray-900 font-semibold text-sm">{user.displayName}</h3>
-                <p className="text-gray-500 text-xs">@{user.username}</p>
+                <h3
+                  className="text-white font-semibold text-sm cursor-pointer hover:underline"
+                  onClick={() => setViewUser(user.id)}
+                >{user.displayName}</h3>
+                <p
+                  className="text-olive-300 text-xs cursor-pointer hover:underline"
+                  onClick={() => setViewUser(user.id)}
+                >@{user.username}</p>
               </div>
               {distance !== null && (
-                <span className="flex items-center gap-1 text-gray-600 text-xs font-medium bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                <span className="flex items-center gap-1 text-olive-200 text-xs font-medium bg-olive-700 px-2.5 py-1 rounded-full border border-olive-500">
                   <Navigation size={10} />
                   {distance < 1 ? `${Math.round(distance * 1000)}m` : `${distance.toFixed(1)}km`}
                 </span>
@@ -70,20 +81,20 @@ function UserCard({ user, distance }: { user: User; distance: number | null }) {
 
             <div className="flex flex-wrap gap-1.5 mt-2">
               {(user.sports || [user.sport]).map((sp) => (
-                <span key={sp} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+                <span key={sp} className="text-xs px-2 py-0.5 rounded-full bg-olive-700 text-olive-200 border border-olive-500">
                   {SPORT_OPTIONS.find((s) => s.id === sp)?.emoji} {SPORT_OPTIONS.find((s) => s.id === sp)?.label || sp}
                 </span>
               ))}
               {user.age > 0 && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-olive-700 text-olive-200 border border-olive-500">
                   {user.age} Jahre
                 </span>
               )}
               {user.sportStats?.level && (
                 <span className={`text-xs px-2 py-0.5 rounded-full border ${
                   user.sportStats.level === "profi" ? "bg-yellow-50 text-yellow-700 border-yellow-200" :
-                  user.sportStats.level === "fortgeschritten" ? "bg-blue-50 text-blue-600 border-blue-200" :
-                  "bg-gray-100 text-gray-600 border-gray-200"
+                  user.sportStats.level === "fortgeschritten" ? "bg-olive-50 text-olive-700 border-olive-200" :
+                  "bg-olive-700 text-olive-200 border-olive-500"
                 }`}>
                   {LEVEL_LABELS[user.sportStats.level]}
                 </span>
@@ -94,22 +105,22 @@ function UserCard({ user, distance }: { user: User; distance: number | null }) {
             {user.sportStats && (
               <div className="flex flex-wrap gap-2 mt-2">
                 {user.sportStats.pace && (
-                  <span className="text-[11px] text-gray-500">⏱️ {user.sportStats.pace}</span>
+                  <span className="text-[11px] text-olive-300">⏱️ {user.sportStats.pace}</span>
                 )}
                 {user.sportStats.distance && (
-                  <span className="text-[11px] text-gray-500">📏 {user.sportStats.distance}</span>
+                  <span className="text-[11px] text-olive-300">📏 {user.sportStats.distance}</span>
                 )}
                 {user.sportStats.frequency && (
-                  <span className="text-[11px] text-gray-500">📅 {user.sportStats.frequency}</span>
+                  <span className="text-[11px] text-olive-300">📅 {user.sportStats.frequency}</span>
                 )}
                 {user.sportStats.strength && (
-                  <span className="text-[11px] text-gray-500">💪 {user.sportStats.strength}</span>
+                  <span className="text-[11px] text-olive-300">💪 {user.sportStats.strength}</span>
                 )}
               </div>
             )}
 
             {user.city && (
-              <div className="flex items-center gap-1 mt-2 text-gray-500 text-xs">
+              <div className="flex items-center gap-1 mt-2 text-olive-300 text-xs">
                 <MapPin size={10} />
                 {user.city}
               </div>
@@ -123,14 +134,17 @@ function UserCard({ user, distance }: { user: User; distance: number | null }) {
             disabled={loading}
             className={`flex-1 text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
               isFollowing
-                ? "bg-gray-100 text-gray-600 border border-gray-200 hover:bg-red-50 hover:text-red-500"
-                : "bg-gray-900 text-white"
+                ? "bg-olive-700 text-olive-200 border border-olive-500 hover:bg-red-900/30 hover:text-red-400"
+                : "bg-terra-400 text-white"
             }`}
           >
             <Users size={13} />
             {loading ? "..." : isFollowing ? "Entfolgen" : "Folgen"}
           </button>
-          <button className="flex-1 bg-gray-100 text-gray-700 text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 hover:bg-gray-200 transition-colors border border-gray-200">
+          <button
+            onClick={() => openChat(user.id)}
+            className="flex-1 bg-olive-700 text-olive-200 text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 hover:bg-olive-800 transition-colors border border-olive-500"
+          >
             <MessageCircle size={13} />
             Nachricht
           </button>
@@ -179,15 +193,15 @@ export default function FindFriendsScreen() {
 
   if (!currentUser) {
     return (
-      <div className="h-full flex flex-col bg-white">
+      <div className="h-full flex flex-col bg-olive-700">
         <Header />
         <div className="flex-1 flex flex-col items-center justify-center px-8">
           <div className="text-5xl mb-4">🤝</div>
-          <h2 className="text-xl font-bold text-gray-900">Freunde finden</h2>
-          <p className="text-gray-500 text-sm text-center mt-2">Melde dich an, um Sportler in deiner Nähe zu finden!</p>
+          <h2 className="text-xl font-bold text-white">Freunde finden</h2>
+          <p className="text-olive-200 text-sm text-center mt-2">Melde dich an, um Sportler in deiner Nähe zu finden!</p>
           <button
             onClick={() => setActiveTab("login")}
-            className="mt-6 bg-gray-900 text-white font-semibold px-6 py-3 rounded-xl"
+            className="mt-6 bg-olive-700 text-white font-semibold px-6 py-3 rounded-xl"
           >
             Jetzt anmelden
           </button>
@@ -222,19 +236,19 @@ export default function FindFriendsScreen() {
   });
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-olive-700">
       <Header />
       <div className="flex-1 overflow-y-auto phone-scroll pb-24">
         {/* Title & Location */}
         <div className="px-4 pt-4 pb-2">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Freunde finden</h2>
-              <p className="text-gray-500 text-sm mt-0.5">Sportler in deiner Nähe</p>
+              <h2 className="text-xl font-bold text-white">Freunde finden</h2>
+              <p className="text-olive-300 text-sm mt-0.5">Sportler in deiner Nähe</p>
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`p-2.5 rounded-xl transition-all ${showFilters ? "bg-gray-200 text-gray-700" : "bg-gray-100 text-gray-500"}`}
+              className={`p-2.5 rounded-xl transition-all ${showFilters ? "bg-olive-600 text-terra-400" : "bg-olive-600 text-olive-300"}`}
             >
               <SlidersHorizontal size={18} />
             </button>
@@ -245,7 +259,7 @@ export default function FindFriendsScreen() {
             <button
               onClick={requestLocation}
               disabled={locating}
-              className="mt-3 w-full flex items-center justify-center gap-2 bg-gray-900 text-white text-sm font-semibold py-3 rounded-xl"
+              className="mt-3 w-full flex items-center justify-center gap-2 bg-olive-700 text-white text-sm font-semibold py-3 rounded-xl"
             >
               <Navigation size={16} />
               {locating ? "Standort wird ermittelt..." : "Standort aktivieren"}
@@ -254,11 +268,11 @@ export default function FindFriendsScreen() {
           {hasLocation && (
             <button
               onClick={requestLocation}
-              className="mt-2 flex items-center gap-1.5 text-gray-600 text-xs"
+              className="mt-2 flex items-center gap-1.5 text-olive-300 text-xs"
             >
               <Navigation size={12} />
               <span>Standort aktualisieren</span>
-              {currentUser.city && <span className="text-gray-500">({currentUser.city})</span>}
+              {currentUser.city && <span className="text-olive-400">({currentUser.city})</span>}
             </button>
           )}
           {locError && <p className="text-red-400 text-xs mt-2">{locError}</p>}
@@ -266,10 +280,10 @@ export default function FindFriendsScreen() {
 
         {/* Filters */}
         {showFilters && (
-          <div className="mx-4 mb-3 p-4 bg-gray-50 border border-gray-200 rounded-2xl animate-fade-in space-y-4">
+          <div className="mx-4 mb-3 p-4 bg-olive-600 border border-olive-500 rounded-2xl animate-fade-in space-y-4">
             {/* Sport filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Sportart</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Sportart</label>
               <div className="flex flex-wrap gap-1.5">
                 {SPORT_OPTIONS.map((s) => (
                   <button
@@ -277,8 +291,8 @@ export default function FindFriendsScreen() {
                     onClick={() => setSportFilter(s.id)}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all ${
                       sportFilter === s.id
-                        ? "bg-gray-200 text-gray-900 border border-gray-300"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-olive-50 text-olive-700 border border-olive-300"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     <span>{s.emoji}</span> {s.label}
@@ -289,8 +303,8 @@ export default function FindFriendsScreen() {
 
             {/* Distance filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">
-                Max. Entfernung: <span className="text-gray-900">{maxDistance} km</span>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">
+                Max. Entfernung: <span className="text-terra-300">{maxDistance} km</span>
               </label>
               <input
                 type="range"
@@ -298,9 +312,9 @@ export default function FindFriendsScreen() {
                 max={100}
                 value={maxDistance}
                 onChange={(e) => setMaxDistance(Number(e.target.value))}
-                className="w-full accent-gray-500"
+                className="w-full accent-olive-400"
               />
-              <div className="flex justify-between text-[10px] text-gray-500 mt-1">
+              <div className="flex justify-between text-[10px] text-olive-400 mt-1">
                 <span>1 km</span>
                 <span>100 km</span>
               </div>
@@ -308,7 +322,7 @@ export default function FindFriendsScreen() {
 
             {/* Age filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Alter</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Alter</label>
               <div className="flex gap-1.5">
                 {AGE_RANGES.map((r) => (
                   <button
@@ -316,8 +330,8 @@ export default function FindFriendsScreen() {
                     onClick={() => setAgeRange(r)}
                     className={`flex-1 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
                       ageRange.label === r.label
-                        ? "bg-gray-200 text-gray-900 border border-gray-300"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-olive-50 text-olive-700 border border-olive-300"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     {r.label}
@@ -328,7 +342,7 @@ export default function FindFriendsScreen() {
 
             {/* Level filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Level</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Level</label>
               <div className="flex gap-1.5">
                 {LEVEL_OPTIONS.map((l) => (
                   <button
@@ -336,8 +350,8 @@ export default function FindFriendsScreen() {
                     onClick={() => setLevelFilter(l.id)}
                     className={`flex-1 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
                       levelFilter === l.id
-                        ? "bg-gray-200 text-gray-900 border border-gray-300"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-olive-50 text-olive-700 border border-olive-300"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     {l.label}
@@ -350,7 +364,7 @@ export default function FindFriendsScreen() {
 
         {/* Results count */}
         <div className="px-4 py-2">
-          <p className="text-gray-500 text-xs">{sorted.length} Sportler gefunden</p>
+          <p className="text-olive-300 text-xs">{sorted.length} Sportler gefunden</p>
         </div>
 
         {/* User list */}
@@ -361,7 +375,7 @@ export default function FindFriendsScreen() {
         ) : (
           <div className="flex flex-col items-center justify-center py-16 px-8">
             <div className="text-5xl mb-4">🔍</div>
-            <h3 className="text-gray-900 font-semibold text-lg">Keine Sportler gefunden</h3>
+            <h3 className="text-white font-semibold text-lg">Keine Sportler gefunden</h3>
             <p className="text-gray-500 text-sm text-center mt-2">
               Passe deine Filter an oder vergrößere den Suchradius.
             </p>

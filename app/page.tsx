@@ -19,7 +19,7 @@ import EventDetailScreen from "@/components/screens/EventDetailScreen";
 import { useAppStore } from "@/lib/store";
 
 export default function Home() {
-  const { activeTab, authLoading, initAuth, initEvents, initActivities } = useAppStore();
+  const { activeTab, authLoading, currentUser, initAuth, initEvents, initActivities } = useAppStore();
 
   useEffect(() => {
     const unsubAuth = initAuth();
@@ -27,14 +27,16 @@ export default function Home() {
   }, [initAuth]);
 
   useEffect(() => {
+    if (!currentUser) return;
     const unsubEvents = initEvents();
     return () => unsubEvents();
-  }, [initEvents]);
+  }, [currentUser, initEvents]);
 
   useEffect(() => {
+    if (!currentUser) return;
     const unsubActivities = initActivities();
     return () => unsubActivities();
-  }, [initActivities]);
+  }, [currentUser, initActivities]);
 
   if (authLoading) {
     return (
@@ -44,6 +46,14 @@ export default function Home() {
           <h1 className="text-xl font-bold text-white">SportsFreunde</h1>
           <p className="text-gray-400 text-sm mt-2">Wird geladen...</p>
         </div>
+      </PhoneFrame>
+    );
+  }
+
+  if (!currentUser && activeTab !== "login" && activeTab !== "register") {
+    return (
+      <PhoneFrame>
+        <LoginScreen />
       </PhoneFrame>
     );
   }

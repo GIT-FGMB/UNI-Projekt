@@ -62,11 +62,8 @@ export default function ChatScreen() {
   };
 
   const goBack = () => {
-    if (useAppStore.getState().viewUserId) {
-      setActiveTab("userprofile");
-    } else {
-      setActiveTab("inbox");
-    }
+    const prev = useAppStore.getState().previousTab;
+    setActiveTab(prev || "inbox");
   };
 
   const formatTime = (createdAt: string) => {
@@ -97,16 +94,16 @@ export default function ChatScreen() {
   });
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-olive-700">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-12 pb-3 bg-white border-b border-gray-200">
-        <button onClick={goBack} className="text-gray-700">
+      <div className="flex items-center gap-3 px-4 pt-12 pb-3 bg-olive-800 border-b border-olive-600">
+        <button onClick={goBack} className="text-olive-300">
           <ArrowLeft size={22} />
         </button>
         <img src={getAvatarUrl(partnerName)} alt={partnerName} className="w-8 h-8 rounded-full object-cover" />
         <div className="flex-1">
-          <p className="text-gray-900 font-semibold text-sm">{partnerName || "..."}</p>
-          <p className="text-gray-400 text-[10px]">Online</p>
+          <p className="text-white font-semibold text-sm">{partnerName || "..."}</p>
+          <p className="text-olive-300 text-[10px]">Online</p>
         </div>
       </div>
 
@@ -136,12 +133,12 @@ export default function ChatScreen() {
                     <div
                       className={`max-w-[75%] px-3.5 py-2 rounded-2xl ${
                         isMine
-                          ? "bg-gray-900 text-white rounded-br-md"
-                          : "bg-gray-100 text-gray-900 rounded-bl-md"
+                          ? "bg-terra-400 text-white rounded-br-md"
+                          : "bg-olive-600 text-white rounded-bl-md"
                       }`}
                     >
                       <p className="text-sm break-words">{msg.text}</p>
-                      <p className={`text-[9px] mt-0.5 ${isMine ? "text-gray-300" : "text-gray-400"} text-right`}>
+                      <p className={`text-[9px] mt-0.5 ${isMine ? "text-terra-200" : "text-olive-400"} text-right`}>
                         {formatTime(msg.createdAt)}
                       </p>
                     </div>
@@ -154,7 +151,7 @@ export default function ChatScreen() {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-3 bg-white border-t border-gray-200">
+      <div className="px-4 py-3 bg-olive-800 border-t border-olive-600">
         <div className="flex items-center gap-2">
           <input
             type="text"
@@ -162,13 +159,13 @@ export default function ChatScreen() {
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Nachricht schreiben..."
-            className="flex-1 bg-gray-100 text-gray-900 text-sm px-4 py-2.5 rounded-full placeholder-gray-400 outline-none focus:ring-1 focus:ring-gray-300"
+            className="flex-1 bg-olive-600 text-white text-sm px-4 py-2.5 rounded-full placeholder-olive-400 outline-none focus:ring-1 focus:ring-olive-500"
           />
           <button
             onClick={handleSend}
             disabled={!text.trim() || sending}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-              text.trim() ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-400"
+              text.trim() ? "bg-terra-400 text-white" : "bg-olive-600 text-olive-400"
             }`}
           >
             {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}

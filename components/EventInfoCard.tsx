@@ -36,38 +36,38 @@ export default function EventInfoCard({ event }: { event: SportEvent }) {
         <img src={getAvatarUrl(event.username)} alt={event.username} className="w-9 h-9 rounded-full object-cover" />
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <p className="text-gray-900 text-sm font-semibold">{event.username}</p>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 font-medium border border-blue-200">EVENT</span>
+            <p className="text-white text-sm font-semibold">{event.username}</p>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-olive-600 text-olive-100 font-medium border border-olive-500">EVENT</span>
           </div>
-          <p className="text-gray-400 text-xs">{timeAgo()}</p>
+          <p className="text-olive-300 text-xs">{timeAgo()}</p>
         </div>
         <span className="text-2xl">{SPORT_EMOJI[event.sport] || "🏅"}</span>
       </button>
 
       {/* Event info card */}
-      <div onClick={() => setViewEvent(event.id)} className="mx-4 bg-white rounded-2xl border border-blue-200 overflow-hidden w-[calc(100%-2rem)] text-left cursor-pointer">
-        <div className="h-1.5 bg-blue-500" />
+      <div onClick={() => setViewEvent(event.id)} className="mx-4 bg-olive-600 rounded-2xl border border-olive-500 overflow-hidden w-[calc(100%-2rem)] text-left cursor-pointer">
+        <div className="h-1.5 bg-terra-400" />
         <div className="p-4">
-          <h3 className="text-gray-900 font-bold text-base">{event.title}</h3>
-          <p className="text-gray-500 text-sm mt-1 line-clamp-2">{event.description}</p>
+          <h3 className="text-white font-bold text-base">{event.title}</h3>
+          <p className="text-olive-200 text-sm mt-1 line-clamp-2">{event.description}</p>
 
-          <div className="flex flex-wrap gap-3 mt-3 text-xs text-gray-500">
+          <div className="flex flex-wrap gap-3 mt-3 text-xs text-olive-300">
             <span className="flex items-center gap-1">
-              <Calendar size={12} className="text-blue-500" />
+              <Calendar size={12} className="text-terra-300" />
               {event.date}
             </span>
             <span className="flex items-center gap-1">
-              <Clock size={12} className="text-blue-500" />
+              <Clock size={12} className="text-terra-300" />
               {event.time}
             </span>
             <span className="flex items-center gap-1">
-              <MapPin size={12} className="text-blue-500" />
+              <MapPin size={12} className="text-terra-300" />
               {event.location}
             </span>
           </div>
 
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-            <div className="flex items-center gap-1.5 text-gray-500 text-xs">
+          <div className="flex items-center justify-between mt-4 pt-3 border-t border-olive-500">
+            <div className="flex items-center gap-1.5 text-olive-300 text-xs">
               <Users size={14} />
               <span>{participantCount} Teilnehmer</span>
             </div>
@@ -79,8 +79,8 @@ export default function EventInfoCard({ event }: { event: SportEvent }) {
               }}
               className={`text-xs font-semibold px-4 py-1.5 rounded-full transition-all ${
                 isParticipant
-                  ? "bg-blue-500 text-white"
-                  : "bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100"
+                  ? "bg-terra-400 text-white"
+                  : "bg-terra-400/20 text-terra-300 border border-terra-400/40 hover:bg-terra-400/30"
               }`}
             >
               {isParticipant ? "✓ Dabei" : "Teilnehmen"}
@@ -89,7 +89,7 @@ export default function EventInfoCard({ event }: { event: SportEvent }) {
         </div>
       </div>
 
-      <div className="h-px bg-gray-200 mx-4 mt-4" />
+      <div className="h-px bg-olive-600 mx-4 mt-4" />
     </div>
   );
 }

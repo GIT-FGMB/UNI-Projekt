@@ -127,6 +127,7 @@ interface AppState {
   viewUserId: string | null;
   viewEventId: string | null;
   chatUserId: string | null;
+  previousTab: string | null;
   chats: Chat[];
   loading: boolean;
   authLoading: boolean;
@@ -225,6 +226,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   viewUserId: null,
   viewEventId: null,
   chatUserId: null,
+  previousTab: null,
   chats: [],
   loading: true,
   authLoading: true,
@@ -236,10 +238,10 @@ export const useAppStore = create<AppState>((set, get) => ({
         if (userDoc.exists()) {
           set({ currentUser: { id: firebaseUser.uid, ...userDoc.data() } as User, authLoading: false });
         } else {
-          set({ currentUser: null, authLoading: false });
+          set({ currentUser: null, authLoading: false, loading: false });
         }
       } else {
-        set({ currentUser: null, authLoading: false });
+        set({ currentUser: null, authLoading: false, loading: false });
       }
     });
     return unsubscribe;
@@ -322,11 +324,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   setActiveTab: (tab: string) => set({ activeTab: tab }),
 
   setViewUser: (userId: string) => {
-    set({ viewUserId: userId, activeTab: "userprofile" });
+    set((state) => ({ viewUserId: userId, previousTab: state.activeTab, activeTab: "userprofile" }));
   },
 
   setViewEvent: (eventId: string) => {
-    set({ viewEventId: eventId, activeTab: "eventdetail" });
+    set((state) => ({ viewEventId: eventId, previousTab: state.activeTab, activeTab: "eventdetail" }));
   },
 
   addEvent: async (eventData) => {
@@ -553,7 +555,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   openChat: (targetUserId: string) => {
-    set({ chatUserId: targetUserId, activeTab: "chat" });
+    set((state) => ({ chatUserId: targetUserId, previousTab: state.activeTab, activeTab: "chat" }));
   },
 
   getOrCreateChat: async (targetUserId: string) => {

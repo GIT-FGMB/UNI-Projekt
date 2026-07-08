@@ -20,7 +20,7 @@ export default function BottomNav() {
     : 0;
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 pb-6 pt-2 z-30">
+    <div className="absolute bottom-0 left-0 right-0 bg-olive-800/95 backdrop-blur-lg border-t border-olive-600/30 pb-6 pt-2 z-30">
       <div className="flex justify-around items-center">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -39,19 +39,19 @@ export default function BottomNav() {
               }}
               className={`flex flex-col items-center gap-0.5 px-3 py-1 transition-all duration-200 ${
                 isActive
-                  ? "text-gray-900 scale-110"
-                  : "text-gray-400 hover:text-gray-600"
+                  ? "text-terra-400 scale-110"
+                  : "text-olive-300 hover:text-white"
               }`}
             >
               {tab.id === "create" ? (
-                <div className={`p-1.5 rounded-xl ${isActive ? "bg-gray-100" : ""}`}>
+                <div className={`p-1.5 rounded-xl ${isActive ? "bg-olive-700" : ""}`}>
                   <Icon size={24} strokeWidth={isActive ? 2.5 : 1.5} />
                 </div>
               ) : (
                 <div className="relative">
                   <Icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
                   {tab.id === "inbox" && totalUnread > 0 && (
-                    <span className="absolute -top-1.5 -right-2 w-4 h-4 bg-blue-500 text-white text-[8px] font-bold rounded-full flex items-center justify-center">
+                    <span className="absolute -top-1.5 -right-2 w-4 h-4 bg-terra-400 text-white text-[8px] font-bold rounded-full flex items-center justify-center">
                       {totalUnread}
                     </span>
                   )}

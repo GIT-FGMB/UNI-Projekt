@@ -113,7 +113,7 @@ export default function CreateEventScreen() {
           <button
             onClick={() => setMode("activity")}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              mode === "activity" ? "bg-green-500 text-white" : "text-gray-500"
+              mode === "activity" ? "bg-olive-700 text-white" : "text-gray-500"
             }`}
           >
             <Dumbbell size={16} /> Aktivität
@@ -121,7 +121,7 @@ export default function CreateEventScreen() {
           <button
             onClick={() => setMode("event")}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              mode === "event" ? "bg-blue-500 text-white" : "text-gray-500"
+              mode === "event" ? "bg-olive-700 text-white" : "text-gray-500"
             }`}
           >
             <CalendarPlus size={16} /> Event
@@ -245,7 +245,7 @@ export default function CreateEventScreen() {
             disabled={!canSubmit}
             className={`w-full font-semibold py-3.5 rounded-xl mt-2 transition-all ${
               canSubmit
-                ? `${mode === "activity" ? "bg-green-500" : "bg-blue-500"} text-white active:scale-[0.98]`
+                ? `bg-terra-400 text-white active:scale-[0.98]`
                 : "bg-gray-200 text-gray-400 cursor-not-allowed"
             }`}
           >

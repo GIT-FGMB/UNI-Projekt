@@ -241,7 +241,7 @@ export default function EditProfileScreen() {
                 }}
                 className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all ${
                   sports.includes(s.id)
-                    ? "border-gray-900 bg-gray-100 text-gray-900"
+                    ? "border-olive-700 bg-olive-50 text-olive-800"
                     : "border-gray-200 bg-gray-50 text-gray-500"
                 }`}
               >
@@ -284,7 +284,7 @@ export default function EditProfileScreen() {
                         onClick={() => updateSportStat(sportId, "level", l.id)}
                         className={`flex flex-col items-center gap-0.5 p-2 rounded-lg border transition-all ${
                           stat.level === l.id
-                            ? "border-gray-900 bg-gray-100 text-gray-900"
+                            ? "border-olive-700 bg-olive-50 text-olive-800"
                             : "border-gray-200 bg-white text-gray-500"
                         }`}
                       >
@@ -305,7 +305,7 @@ export default function EditProfileScreen() {
                         onClick={() => updateSportStat(sportId, "frequency", f)}
                         className={`flex-1 py-1.5 rounded-lg text-[9px] font-medium transition-all ${
                           stat.frequency === f
-                            ? "bg-gray-100 text-gray-900 border border-gray-900"
+                            ? "bg-olive-50 text-olive-800 border border-olive-700"
                             : "bg-gray-100 text-gray-500 border border-transparent"
                         }`}
                       >

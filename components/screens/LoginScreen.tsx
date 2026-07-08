@@ -72,7 +72,7 @@ export default function LoginScreen() {
           <button
             onClick={handleLogin}
             disabled={loading}
-            className="w-full bg-gray-900 text-white font-semibold py-3.5 rounded-xl hover:bg-gray-800 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full bg-olive-700 text-white font-semibold py-3.5 rounded-xl hover:bg-olive-600 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {loading ? <><Loader2 size={18} className="animate-spin" /> Wird angemeldet...</> : "Anmelden"}
           </button>

@@ -114,22 +114,22 @@ export default function EventsScreen() {
   ].filter(Boolean).length;
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-olive-700">
       <Header />
       <div className="flex-1 overflow-y-auto phone-scroll pb-24">
         <div className="px-4 pt-4 pb-2">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Kommende Events</h2>
-              <p className="text-gray-500 text-sm mt-0.5">Entdecke Sport-Events in deiner Nähe</p>
+              <h2 className="text-xl font-bold text-white">Kommende Events</h2>
+              <p className="text-olive-300 text-sm mt-0.5">Entdecke Sport-Events in deiner Nähe</p>
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`relative p-2.5 rounded-xl transition-all ${showFilters ? "bg-blue-50 text-blue-600" : "bg-gray-100 text-gray-500"}`}
+              className={`relative p-2.5 rounded-xl transition-all ${showFilters ? "bg-olive-600 text-terra-400" : "bg-olive-600 text-olive-300"}`}
             >
               <SlidersHorizontal size={18} />
               {activeFilterCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-terra-400 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                   {activeFilterCount}
                 </span>
               )}
@@ -139,10 +139,10 @@ export default function EventsScreen() {
 
         {/* Filter panel */}
         {showFilters && (
-          <div className="mx-4 mb-3 p-4 bg-gray-50 border border-gray-200 rounded-2xl animate-fade-in space-y-4">
+          <div className="mx-4 mb-3 p-4 bg-olive-600 border border-olive-500 rounded-2xl animate-fade-in space-y-4">
             {/* Sport filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Sportart</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Sportart</label>
               <div className="flex flex-wrap gap-1.5">
                 {SPORT_OPTIONS.map((s) => (
                   <button
@@ -150,8 +150,8 @@ export default function EventsScreen() {
                     onClick={() => setSportFilter(s.id)}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all ${
                       sportFilter === s.id
-                        ? "bg-blue-50 text-blue-600 border border-blue-200"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-terra-400/20 text-terra-300 border border-terra-400/40"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     <span>{s.emoji}</span> {s.label}
@@ -163,8 +163,8 @@ export default function EventsScreen() {
             {/* Distance filter */}
             {currentUser && (
               <div>
-                <label className="text-gray-500 text-xs font-medium mb-2 block">
-                  Max. Entfernung: <span className="text-blue-600">{maxDistance} km</span>
+                <label className="text-olive-200 text-xs font-medium mb-2 block">
+                  Max. Entfernung: <span className="text-terra-300">{maxDistance} km</span>
                 </label>
                 {hasLocation ? (
                   <>
@@ -174,9 +174,9 @@ export default function EventsScreen() {
                       max={100}
                       value={maxDistance}
                       onChange={(e) => setMaxDistance(Number(e.target.value))}
-                      className="w-full accent-blue-500"
+                      className="w-full accent-olive-600"
                     />
-                    <div className="flex justify-between text-[10px] text-gray-500 mt-1">
+                    <div className="flex justify-between text-[10px] text-olive-400 mt-1">
                       <span>1 km</span>
                       <span>100 km</span>
                     </div>
@@ -185,7 +185,7 @@ export default function EventsScreen() {
                   <button
                     onClick={requestLocation}
                     disabled={locating}
-                    className="w-full flex items-center justify-center gap-2 bg-blue-50 text-blue-600 text-xs font-medium py-2.5 rounded-xl border border-blue-200"
+                    className="w-full flex items-center justify-center gap-2 bg-olive-700 text-olive-200 text-xs font-medium py-2.5 rounded-xl border border-olive-500"
                   >
                     <Navigation size={14} />
                     {locating ? "Wird ermittelt..." : "Standort aktivieren für Entfernung"}
@@ -196,7 +196,7 @@ export default function EventsScreen() {
 
             {/* Level filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Leistungsklasse</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Leistungsklasse</label>
               <div className="flex gap-1.5">
                 {LEVEL_OPTIONS.map((l) => (
                   <button
@@ -204,8 +204,8 @@ export default function EventsScreen() {
                     onClick={() => setLevelFilter(l.id)}
                     className={`flex-1 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
                       levelFilter === l.id
-                        ? "bg-blue-50 text-blue-600 border border-blue-200"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-terra-400/20 text-terra-300 border border-terra-400/40"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     {l.label}
@@ -216,7 +216,7 @@ export default function EventsScreen() {
 
             {/* Time filter */}
             <div>
-              <label className="text-gray-500 text-xs font-medium mb-2 block">Zeitraum</label>
+              <label className="text-olive-200 text-xs font-medium mb-2 block">Zeitraum</label>
               <div className="flex gap-1.5">
                 {TIME_OPTIONS.map((t) => (
                   <button
@@ -224,8 +224,8 @@ export default function EventsScreen() {
                     onClick={() => setTimeFilter(t.id)}
                     className={`flex-1 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
                       timeFilter === t.id
-                        ? "bg-blue-50 text-blue-600 border border-blue-200"
-                        : "bg-gray-100 text-gray-500 border border-transparent"
+                        ? "bg-terra-400/20 text-terra-300 border border-terra-400/40"
+                        : "bg-olive-700 text-olive-300 border border-olive-500"
                     }`}
                   >
                     {t.label}
@@ -238,7 +238,7 @@ export default function EventsScreen() {
             {activeFilterCount > 0 && (
               <button
                 onClick={() => { setSportFilter("alle"); setLevelFilter("alle"); setMaxDistance(100); setTimeFilter("alle"); }}
-                className="w-full text-xs text-gray-400 hover:text-gray-600 py-1.5 transition-colors"
+                className="w-full text-xs text-olive-300 hover:text-white py-1.5 transition-colors"
               >
                 Alle Filter zurücksetzen
               </button>
@@ -248,7 +248,7 @@ export default function EventsScreen() {
 
         {/* Results count */}
         <div className="px-4 py-1">
-          <p className="text-gray-500 text-xs">{upcoming.length} Events gefunden</p>
+          <p className="text-olive-300 text-xs">{upcoming.length} Events gefunden</p>
         </div>
 
         <div className="px-4 space-y-3 pt-2">
@@ -256,19 +256,19 @@ export default function EventsScreen() {
             <button
               key={event.id}
               onClick={() => setViewEvent(event.id)}
-              className="animate-fade-in bg-white rounded-2xl overflow-hidden border border-blue-200 w-full text-left"
+              className="animate-fade-in bg-olive-600 rounded-2xl overflow-hidden border border-olive-500 w-full text-left"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Color bar */}
-              <div className="h-1.5 bg-blue-500" />
+              <div className="h-1.5 bg-terra-400" />
 
               <div className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="text-gray-900 font-semibold text-base">{event.title}</h3>
+                    <h3 className="text-white font-semibold text-base">{event.title}</h3>
                     <div className="flex items-center gap-1 mt-1.5">
                       <img src={getAvatarUrl(event.username)} alt={event.username} className="w-5 h-5 rounded-full object-cover" />
-                      <span className="text-gray-500 text-xs">@{event.username}</span>
+                      <span className="text-olive-300 text-xs">@{event.username}</span>
                     </div>
                   </div>
                   <span className="text-2xl ml-3">
@@ -276,25 +276,25 @@ export default function EventsScreen() {
                   </span>
                 </div>
 
-                <p className="text-gray-500 text-sm mt-2 line-clamp-2">{event.description}</p>
+                <p className="text-olive-200 text-sm mt-2 line-clamp-2">{event.description}</p>
 
-                <div className="flex flex-wrap gap-3 mt-3 text-xs text-gray-500">
+                <div className="flex flex-wrap gap-3 mt-3 text-xs text-olive-300">
                   <span className="flex items-center gap-1">
-                    <Calendar size={12} className="text-blue-500" />
+                    <Calendar size={12} className="text-terra-300" />
                     {event.date}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock size={12} className="text-blue-500" />
+                    <Clock size={12} className="text-terra-300" />
                     {event.time}
                   </span>
                   <span className="flex items-center gap-1">
-                    <MapPin size={12} className="text-blue-500" />
+                    <MapPin size={12} className="text-terra-300" />
                     {event.location}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                  <div className="flex items-center gap-1 text-gray-500 text-xs">
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-olive-500">
+                  <div className="flex items-center gap-1 text-olive-300 text-xs">
                     <Users size={14} />
                     <span>{(event.participants || []).length} Teilnehmer</span>
                   </div>
@@ -302,14 +302,15 @@ export default function EventsScreen() {
                     const isParticipant = currentUser && (event.participants || []).includes(currentUser.id);
                     return (
                       <button
-                        onClick={async () => {
+                        onClick={async (e) => {
+                          e.stopPropagation();
                           if (!currentUser) { setActiveTab("login"); return; }
                           await toggleParticipation(event.id);
                         }}
                         className={`text-xs font-semibold px-4 py-1.5 rounded-full transition-all ${
                           isParticipant
-                            ? "bg-blue-500 text-white"
-                            : "bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100"
+                            ? "bg-terra-400 text-white"
+                            : "bg-terra-50 text-terra-500 border border-terra-200 hover:bg-terra-100"
                         }`}
                       >
                         {isParticipant ? "✓ Dabei" : "Teilnehmen"}
@@ -322,14 +323,14 @@ export default function EventsScreen() {
           )) : (
             <div className="flex flex-col items-center justify-center py-16 px-8">
               <div className="text-5xl mb-4">🔍</div>
-              <h3 className="text-gray-900 font-semibold text-lg">Keine Events gefunden</h3>
-              <p className="text-gray-500 text-sm text-center mt-2">
+              <h3 className="text-white font-semibold text-lg">Keine Events gefunden</h3>
+              <p className="text-olive-200 text-sm text-center mt-2">
                 Passe deine Filter an oder erstelle selbst ein Event!
               </p>
               {activeFilterCount > 0 && (
                 <button
                   onClick={() => { setSportFilter("alle"); setLevelFilter("alle"); setMaxDistance(100); setTimeFilter("alle"); }}
-                  className="mt-4 bg-blue-50 text-blue-600 border border-blue-200 text-sm font-semibold px-5 py-2.5 rounded-xl"
+                  className="mt-4 bg-terra-400/20 text-terra-300 border border-terra-400/40 text-sm font-semibold px-5 py-2.5 rounded-xl"
                 >
                   Filter zurücksetzen
                 </button>
