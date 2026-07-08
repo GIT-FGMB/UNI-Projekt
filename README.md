@@ -79,7 +79,18 @@ Web-Prototyp/
 └── next.config.js
 ```
 
-## Installation & Setup
+## Schnellstart (empfohlen)
+
+**Keine Vorkenntnisse oder Installationen nötig:**
+
+1. Repository herunterladen oder klonen
+2. `start.bat` doppelklicken
+3. Beim ersten Start wird automatisch alles eingerichtet (Node.js, Abhängigkeiten)
+4. Die App öffnet sich automatisch im Browser
+
+> **Hinweis:** Der erste Start dauert etwas länger, da Node.js heruntergeladen und die Abhängigkeiten installiert werden. Ab dem zweiten Start geht es deutlich schneller.
+
+## Manuelle Installation (alternativ)
 
 ### Voraussetzungen
 
