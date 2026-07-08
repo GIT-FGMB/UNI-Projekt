@@ -83,29 +83,39 @@ Web-Prototyp/
 
 ### Voraussetzungen
 
-- [Node.js](https://nodejs.org/) (Version 18 oder höher)
-- npm (wird mit Node.js installiert)
+- [Node.js](https://nodejs.org/) (Version 18 oder höher empfohlen)
+- npm (wird mit Node.js mitgeliefert)
+- Ein moderner Webbrowser (Chrome, Firefox, Edge, Safari)
 
-### Installation
+### Schritt-für-Schritt-Anleitung
 
 ```bash
-# Repository klonen
+# 1. Repository klonen
 git clone https://github.com/GIT-FGMB/UNI-Projekt.git
 
-# In das Projektverzeichnis wechseln
+# 2. In das Projektverzeichnis wechseln
 cd UNI-Projekt
 
-# Abhängigkeiten installieren
+# 3. Abhängigkeiten installieren
 npm install
+
+# 4. Entwicklungsserver starten
+npm run dev
 ```
 
-## Firebase-Konfiguration
+Die App ist dann unter [http://localhost:3000](http://localhost:3000) im Browser erreichbar.
 
-Das Projekt nutzt Firebase für Authentifizierung und Datenbank. Die Konfiguration befindet sich in `lib/firebase.ts` und ist mit dem Projekt **app-sportsfreunde** verbunden.
+> **Hinweis:** Beim ersten Start muss ein neues Konto über „Neues Konto erstellen" registriert werden. Eine separate Firebase-Einrichtung ist **nicht** nötig – die Konfiguration ist bereits im Projekt enthalten.
+
+## Firebase
+
+### Konfiguration
+
+Das Projekt nutzt Firebase für Authentifizierung (Firebase Auth) und Datenbank (Cloud Firestore). Die Konfiguration befindet sich in `lib/firebase.ts` und ist mit dem Firebase-Projekt **app-sportsfreunde** verbunden. Es ist keine zusätzliche Konfiguration durch den Nutzer erforderlich.
 
 ### Firestore Security Rules
 
-Folgende Regeln müssen in der [Firebase Console](https://console.firebase.google.com/) unter **Firestore Database → Regeln** hinterlegt sein:
+Damit die App korrekt funktioniert, müssen folgende Regeln in der [Firebase Console](https://console.firebase.google.com/) unter **Firestore Database → Regeln** hinterlegt sein:
 
 ```
 rules_version = '2';
@@ -137,21 +147,20 @@ service cloud.firestore {
 }
 ```
 
-## Starten der Anwendung
+### Testdaten laden (optional)
+
+Im Ordner `scripts/` befinden sich Seed-Skripte, um die Datenbank mit Beispieldaten zu befüllen:
 
 ```bash
-# Entwicklungsserver starten
-npm run dev
+node scripts/seed-users.mjs       # Beispiel-Nutzer anlegen
+node scripts/seed-events.mjs      # Beispiel-Events erstellen
+node scripts/seed-activities.mjs  # Beispiel-Aktivitäten erstellen
 ```
 
-Die App ist dann unter [http://localhost:3000](http://localhost:3000) erreichbar.
+## Verfügbare Befehle
 
-### Weitere Befehle
-
-```bash
-# Produktions-Build erstellen
-npm run build
-
-# Produktions-Build starten
-npm start
-```
+| Befehl          | Beschreibung                              |
+|-----------------|-------------------------------------------|
+| `npm run dev`   | Startet den Entwicklungsserver            |
+| `npm run build` | Erstellt einen optimierten Produktions-Build |
+| `npm start`     | Startet den Produktions-Build             |
